@@ -1,0 +1,25 @@
+# sample config.yaml (trimmed)
+miners:
+  - name: ant01
+    type: antminer
+    ip: 10.229.65.73
+    username: root
+    password: root
+    pools:
+      solo: {url: stratum+tcp://solo.ckpool.org:3333, worker: bc1qSoloAddr, password: x}
+      pool: {url: stratum+tcp://sha256.poolin.com:443,    worker: user.worker, password: x}
+
+  - name: whats01
+    type: whatsminer
+    ip: 10.229.65.94
+    username: admin
+    password: admin
+    pools:
+      pool: {url: stratum+tcp://btc.ss.poolin.one:443, worker: user.w1,       password: x}
+      solo: {url: stratum+tcp://solo.ckpool.org:3333,  worker: bc1qSoloAddr, password: x}
+
+schedule:
+  - cron: "0 0 * * *"      # Midnight – solo mine
+    pool_key: solo
+  - cron: "0 8 * * *"      # 08:00 – back to pool
+    pool_key: pool
